@@ -1,0 +1,74 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+
+<div class="heading" style="margin-top: 65px;">
+    Hospital Views
+</div>
+
+<div class="col-md-12 pr-3 pl-3 mt-3">
+    <div id="divPrint">
+    <table class="table table-sm table-striped " style="text-align: center; overflow-x: scroll;" id="">
+        <thead>
+            <tr>
+            <th scope="col">Hospital/Camps</th>
+            <th scope="col">Address</th>
+            <th scope="col">Contact Number</th>
+            <th scope="col">Edit</th>
+            <th scope="col">Delete</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for i in data %}
+            <tr>
+            
+            <td>{{i.hospital}}</td>
+            <td>{{i.address}}</td>
+            <td>{{i.phone}}</td>
+            <td><button  class="btn btn-success" data-target="#editmodel{{ i.id }}" data-toggle="modal" value="Edit">Edit</button></td>
+            <td><a href="{% url 'edit_delete_hospital' i.id 'Delete' %}"><button class="btn btn-danger">Delete</button></a></td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+    <button class="btn btn-success w-30 mt-2 ml-2" onclick="CallPrint('divPrint');"> Print</button>
+              
+</div>
+
+
+<!--Edit Modal --------------------------------------------------------------------------------------------->
+{% for i in data %}
+<form action="{% url 'edit_delete_hospital' i.id 'Edit' %}" method="post" enctype="multipart/form-data">
+    {% csrf_token %}
+<div class="modal" id="editmodel{{ i.id }}">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header" style="font-family: 'Times New Roman', Times, serif;">
+                <h3>Edit</h3>
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+            </div>
+            <div class="modal-body">
+                    <div class="form-group">
+                        <label id="editlable">Hospital/Camps Name</label>
+                        <input type="text" name="hospital" value="{{ i.hospital }}" class="form-control">
+                        <label id="editlable">Address</label>
+                        <input type="text" name="address" value="{{ i.address }}" class="form-control">
+                        <label id="editlable">Contact</label>
+                        <input type="text" name="phone" value="{{ i.phone }}" class="form-control">               
+                    </div>
+                
+            </div>
+            <div class="modal-footer justify-content-center">
+                <button class="btn btn-success" type="submit">Save</button>
+            </div>
+        </div>
+    </div>
+</div>
+</form>
+{% endfor %}
+
+
+
+
+{% endblock %}

@@ -1,0 +1,49 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+
+<div class="heading" style="margin-top: 65px;">
+    Blood Request Views
+</div>
+
+<div class="col-md-12 pr-3 pl-3 mt-3">
+        <div id="divPrint">
+    <table class="table table-sm table-striped " style="text-align: center;" id="">
+        <thead>
+            <tr>
+            <th scope="col">Name</th>
+            <th scope="col">Father Name</th>
+            <th scope="col">Blood Group</th>
+            <th scope="col">Email</th>
+            <th scope="col">Contact Number</th>
+            <th scope="col">Address</th>
+            <th scope="col">Accept</th>
+            <th scope="col">Dismiss</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for i in data %}
+            <tr>
+            
+            <td>{{i.name}}</td>
+            <td>{{i.fathername}}</td>
+            <td>{{i.group}}</td>
+            <td>{{i.email}}</td>
+            <td>{{i.phone}}</td>
+            <td>{{i.address}}</td>
+            <td><a href="{% url 'message' i.id 'Accept' %}"><button class="btn btn-success" value="Accept">Accept</button></a></td>
+            <td><a href="{% url 'message' i.id 'Dismiss' %}"><button class="btn btn-danger" value="Dismiss">Dismiss</button></td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+<button class="btn btn-success w-30 mt-2 ml-2" onclick="CallPrint('divPrint');"> Print</button>
+              
+</div>
+
+
+
+
+
+{% endblock %}

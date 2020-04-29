@@ -1,0 +1,40 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+
+<div style="margin-top: 80px;">
+  <h1 style="color: black; font-size:30px;">Donate Blood And Save Other Life<br>Doner View</h1>
+</div>
+<div class="col-md-12 pr-2 pl-2">
+    <div id="divPrint">
+  <table class="table table-sm  table-striped" id="" style="text-align: center;" >
+    <thead>
+      <tr>            
+        <th scope="col">Name Of Doner</th>
+        <th scope="col">Father Name</th>
+        <th scope="col">Hospital Name</th>
+        <th scope="col">Blood Group</th>
+        <th scope="col">Email Id</th>
+        <th scope="col">Contact Number</th>
+        <th scope="col">Address</th>
+      </tr>
+    </thead>
+    <tbody>
+    {% for i in data %}
+    <tr>
+      <td>{{i.name}}</td>
+      <td>{{i.fathername}}</td>
+      <td>{{i.hospital}}</td>
+      <td>{{i.group}}</td>
+      <td>{{i.email}}</td>
+      <td>{{i.phone}}</td>
+      <td>{{i.address}}</td>
+    </tr>
+    {% endfor %}
+    </tbody>
+  </table>
+</div>
+<button class="btn btn-success w-30 mt-2 ml-2" onclick="CallPrint('divPrint');"> Print</button>
+</div>
+    
+{% endblock %}

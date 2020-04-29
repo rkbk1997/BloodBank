@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+{% load static %}
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>indexpage</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.7.2/animate.min.css">
+    <link rel="stylesheet" href="{% static 'style.css' %}">
+</head>
+<body>
+  <!---header start=====================================================================================-->
+    <header>
+        <nav class="navbar navbar-expand-lg navbar-light bg-dark">
+            <a class="navbar-brand" href=""><img src="{% static 'logo.png' %}" alt="" style="height: 30px; border-radius: 10px;"></a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo02" aria-controls="navbarTogglerDemo02" aria-expanded="false" aria-label="Toggle navigation">
+              <span class="navbar-toggler-icon"></span>
+            </button>
+          
+            <div class="collapse navbar-collapse" id="navbarTogglerDemo02">
+              <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
+                <li class="nav-item active">
+                  <a class="nav-link" href="home"  ><i class="fa fa-home fa-lg" ></i>&nbsp;Home <span class="sr-only">(current)</span></a>
+                </li>
+                {% if request.user.is_staff %}
+                <li class="nav-item">
+                  <a class="nav-link" href="addhospital" data-target="" data-toggle=""><i class="fa fa-bars fa-lg"></i>&nbsp;Add Hospital</a>
+                </li>
+                
+                <li class="nav-item">
+                  <a class="nav-link" href="viewhospital" data-target="" data-toggle=""><i class="fa fa-eye fa-lg" ></i>&nbsp;View Hopital</a>
+                </li>
+                {% endif %}
+                <li class="nav-item">
+                  <a class="nav-link" href="bloodreq" data-target="" data-toggle=""><i class="fa fa-bars fa-lg" ></i>&nbsp;Blood Request</a>
+                </li>
+                {% if request.user.is_staff %}
+                <li class="nav-item">
+                  <a class="nav-link" href="viewreq" data-target="" data-toggle=""><i class="fa fa-eye fa-lg" ></i>&nbsp;View Blood Request</a>
+                </li>
+                {% endif %}
+                <li class="nav-item">
+                  <a class="nav-link" href="donateblood" data-target="" data-toggle=""><i class="fa fa-heart fa-lg" ></i>&nbsp;Donate Blood</a>
+                </li>
+                {% if request.user.is_staff %}
+                <li class="nav-item">
+                  <a class="nav-link" href="search"><i class="fa fa-eye fa-lg" ></i>&nbsp;View Doners</a>
+                </li>
+                {% endif %}
+                <li class="nav-item">
+                  <a class="nav-link" href="" data-target="#contactmodel" data-toggle="modal"><i class="fa fa-phone fa-lg" ></i>&nbsp;Contact</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="" data-target="#helpmodel" data-toggle="modal"><i class="fa fa-question fa-lg" ></i>&nbsp;Help</a>
+                </li>
+              
+                <li class="nav-item">
+                  <a class="nav-link" href="logout" data-target="" data-toggle=""><i class="fa fa-power-off fa-lg" ></i>&nbsp;Logout</a>
+                </li>
+                {% if user.is_authenticated %}
+            <li class="nav-item">
+                <a class="nav-link" style="text-transform: uppercase;"><i class="fa fa-user fa-lg" ></i>&nbsp;HELLO, {{user.username}}</a>
+              </li>
+            {% endif %}
+              </ul>
+            </div>
+          </nav>
+    </header>
+    <!--header Close=====================================================================================0-->
+
+    <!--modal for contact--------------------------------------->
+  <div class="modal" id="contactmodel">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header" style="font-family: 'Times New Roman', Times, serif;">
+                <h3>Contact Us</h3>
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+            </div>
+            <div class="modal-body">
+              <i class="fa fa-phone" > 9608270004</i><br>
+              B - 82, E - 6, Arera Colony, Bhopal - 462016, Bus Stop No. 11,(Between Gokul Sweets & Bikaner Sweets) (Map)<br><br><br>Diagnostic Centres For Kidney Procedure
+              Hormone Testing Centres
+              Pathology Services At Home
+              Computerised Pathology Labs
+              Blood Donation Centres
+              Diagnostic Centres
+              Education Consultants For Medical
+              Diagnostic Centres For Ferritin.
+            </div>
+           
+        </div>
+    </div>
+</div>
+<!--help =============================================================================-->
+<div class="modal" id="helpmodel">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header" style="font-family: 'Times New Roman', Times, serif;">
+                <h3>Help</h3>
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+            </div>
+            <div class="modal-body">
+              Plz Contact Your Software provider<br>Have a Nice Day.
+            </div>
+           
+        </div>
+    </div>
+</div>
+
+    {% block content %}
+
+
+
+
+    {% endblock %}
+
+    <script type="text/javascript">
+
+      function CallPrint(strid) {
+          var prtContent = document.getElementById(strid);
+          var WinPrint = window.open('print.htm', 'PrintWindow', 'letf=0,top=0,width=800%,height=600,toolbar=1,scrollbars=1,status=1');
+          WinPrint.document.write(prtContent.innerHTML);
+          WinPrint.document.close();
+          WinPrint.focus();
+          WinPrint.print();
+    
+          WinPrint.close();
+      }
+    </script>
+
+    <script>
+      function myfunction(){
+        alert("Your Appointmant is booked We will call You Soon For Confirmation");
+      }
+    </script>
+      <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+      <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+      <script src="http://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
+      <script>
+        $(document).ready( function () {
+        $('#mydatatable').DataTable();
+    } );
+      </script>
+   </body>
+  </html>

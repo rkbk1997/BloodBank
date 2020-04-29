@@ -1,0 +1,38 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+ 
+ <div class="container" style="height: 550px !important;">
+    
+        <center>
+            <img src="{% static 'hospital.jpg' %}" alt="" style="height: 100px; width:300px; border-radius: 20px; margin-top: 30px !important;">
+        </center>
+        <div class="heading">
+            Add Hospital And Camps
+        </div>
+        <form method="POST" action="addhospital" enctype="multipart/form-data">
+            {% csrf_token %}
+        <div class="form-group mt-3">
+            <label for="">Enter Hospital/Camps name</label>
+            <input type="text" class="form-control" name="hospital" id="" placeholder="Hospital/ Camps Name" required>
+            <label for="">Hospital/Camps Address</label>
+            <input type="text" class="form-control" name="address" id="" placeholder="Hospital/Camps Address" required>
+            <label for="">Contact Number</label>
+            <input type="text" class="form-control" name="phone" id="" placeholder="Contact Number" required>
+            <center>
+                <div class="inline mt-3 mb-5 col-md-12 col-sm-12">
+                    <input type="submit" class="btn btn-primary mb-2 " value="Save" style="width: 200px;">
+                    <input type="reset"  class="btn btn-primary mb-2" value="Reset" style="width: 200px;">
+                
+                </div>
+            </center>   
+
+        </div>
+    </form>
+</div>
+
+
+
+
+
+{% endblock %}
